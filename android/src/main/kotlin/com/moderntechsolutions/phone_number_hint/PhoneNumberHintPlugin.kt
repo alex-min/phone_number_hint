@@ -53,10 +53,12 @@ class PhoneNumberHintPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, A
                             activity!!, result.intentSender, HINT_REQUEST, null, 0, 0, 0, null
                         )
                     } catch (e: Exception) {
+                        pendingResult?.error("PHONE HINT FAILED", e.message, e)
                         Log.e(PLUGIN_TAG, "Launching the PendingIntent failed")
                     }
                 }
                 .addOnFailureListener {
+                    pendingResult?.error("PHONE HINT FAILED", "Phone Number Hint failed", "Phone Number Hint failed")
                     Log.e(PLUGIN_TAG, "Phone Number Hint failed")
                 }
 
